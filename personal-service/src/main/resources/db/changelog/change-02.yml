@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-default-values
+      author: betrayal
+      changes:
+        - insert:
+            tableName: contact_types
+            columns:
+              - column:
+                  name: name
+                  value: 'Домашний'
+        - insert:
+            tableName: contact_types
+            columns:
+              - column:
+                  name: name
+                  value: 'Рабочий'
+        - insert:
+            tableName: contact_types
+            columns:
+              - column:
+                  name: name
+                  value: 'Почта'

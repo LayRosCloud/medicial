@@ -6,6 +6,11 @@
         <compositeConfiguration>
           <compositeBuild compositeDefinitionSource="SCRIPT">
             <builds>
+              <build path="$PROJECT_DIR$/personal-service" name="personal-service">
+                <projects>
+                  <project path="$PROJECT_DIR$/personal-service" />
+                </projects>
+              </build>
               <build path="$PROJECT_DIR$/registry-service" name="registry-service">
                 <projects>
                   <project path="$PROJECT_DIR$/registry-service" />
@@ -19,7 +24,16 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/personal-service" />
             <option value="$PROJECT_DIR$/registry-service" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/personal-service" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/personal-service" />
           </set>
         </option>
       </GradleProjectSettings>

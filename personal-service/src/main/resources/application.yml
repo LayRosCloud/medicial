@@ -1,0 +1,23 @@
+server:
+  port: 0
+spring:
+  application:
+    name: 'personal-service'
+  jpa:
+    show-sql: true
+  datasource:
+    url: jdbc:postgresql://${DATABASE_URL}:${DATABASE_PORT}/${DATABASE_SCHEMA}
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    driver-class-name: org.postgresql.Driver
+    user: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
+    url: jdbc:postgresql://${DATABASE_URL}:${DATABASE_PORT}/${DATABASE_SCHEMA}
+    enabled: true
+    change-log: classpath:db/changelog/master.yml
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
