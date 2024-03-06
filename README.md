@@ -7,3 +7,7 @@ this api make requests for database 'professional'
 - make event service
 - make photo service
 - make jwt service
+- make registry-service
+
+
+`author: betrayal`
