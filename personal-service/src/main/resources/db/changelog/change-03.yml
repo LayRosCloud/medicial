@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      author: betrayal
+      id: add-table-medical-cards
+      changes:
+        - createTable:
+            tableName: medical_cards
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: patient_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_cards_people
+                    references: people(id)
+              - column:
+                  name: number
+                  type: varchar(40)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date
+                  type: date
+                  constraints:
+                    nullable: false
