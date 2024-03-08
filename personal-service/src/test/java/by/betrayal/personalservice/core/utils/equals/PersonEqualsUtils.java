@@ -29,6 +29,23 @@ public class PersonEqualsUtils {
         assertEquals(firstItem.getBirthday(), secondItem.getBirthday());
     }
 
+    public static void assertEqualsDto(PersonCreateDto firstItem, PersonFullDto secondItem) {
+        assertEquals(firstItem.getFirstName(), secondItem.getFirstName());
+        assertEquals(firstItem.getLastName(), secondItem.getLastName());
+        assertEquals(firstItem.getPatronymic(), secondItem.getPatronymic());
+        assertEquals(firstItem.getSex(), secondItem.getSex());
+        assertEquals(firstItem.getBirthday(), secondItem.getBirthday());
+    }
+
+    public static void assertEqualsDto(PersonUpdateDto firstItem, PersonFullDto secondItem) {
+        assertEquals(firstItem.getId(), secondItem.getId());
+        assertEquals(firstItem.getFirstName(), secondItem.getFirstName());
+        assertEquals(firstItem.getLastName(), secondItem.getLastName());
+        assertEquals(firstItem.getPatronymic(), secondItem.getPatronymic());
+        assertEquals(firstItem.getSex(), secondItem.getSex());
+        assertEquals(firstItem.getBirthday(), secondItem.getBirthday());
+    }
+
     public static void assertEqualsDto(PersonEntity firstItem, PersonCreateDto secondItem) {
         assertEquals(firstItem.getFirstName(), secondItem.getFirstName());
         assertEquals(firstItem.getLastName(), secondItem.getLastName());

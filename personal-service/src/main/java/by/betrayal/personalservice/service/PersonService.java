@@ -7,6 +7,7 @@ import by.betrayal.personalservice.dto.person.PersonUpdateDto;
 import java.util.List;
 
 public interface PersonService {
+
     List<PersonFullDto> findAll();
     PersonFullDto findById(Long id);
     PersonFullDto create(PersonCreateDto dto);
