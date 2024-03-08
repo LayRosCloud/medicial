@@ -23,21 +23,33 @@ repositories {
 
 ext {
 	set('springCloudVersion', "2023.0.0")
-	set('mapStructVersion', "1.5.5.Final")
 }
 
 dependencies {
+	// spring
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation group: 'org.mapstruct', name: 'mapstruct', version: "${mapStructVersion}"
-	implementation group: 'org.mapstruct', name: 'mapstruct-processor', version: "${mapStructVersion}"
-	implementation 'org.liquibase:liquibase-core'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '3.2.3'
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-	compileOnly 'org.projectlombok:lombok'
+
+	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
+
+	// database
 	runtimeOnly 'org.postgresql:postgresql'
+	implementation 'org.liquibase:liquibase-core'
+
+	// mapper
+	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+	annotationProcessor "org.projectlombok:lombok-mapstruct-binding:0.2.0"
+
+	// lombok
+	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+
+	//tests
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'net.datafaker:datafaker:2.1.0'
 }
 
 dependencyManagement {

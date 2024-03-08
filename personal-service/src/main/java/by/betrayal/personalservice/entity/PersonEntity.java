@@ -1,10 +1,18 @@
 package by.betrayal.personalservice.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.Instant;
 
 @Data
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "people")
 public class PersonEntity {
     @Id
@@ -19,4 +27,13 @@ public class PersonEntity {
 
     @Column(name = "patronymic", nullable = false)
     public String patronymic;
+
+    @Column(name = "sex", nullable = false)
+    public Boolean sex;
+
+    @Column(name = "birthday", nullable = false)
+    public Instant birthday;
+
+    @Column(name = "image")
+    public String image;
 }
