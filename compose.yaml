@@ -1,15 +1,16 @@
 version: "3.6"
 volumes:
-  postgres_data:
+  mysql_data:
 services:
   personal-service:
-    image: postgres:16.1
+    image: mysql:8.0
+    container_name: mysql_container
     ports:
-      - "${PER_SERVICE_DATABASE_PORT}:5432"
+      - "${PER_SERVICE_DATABASE_PORT}:3306"
     environment:
-      - POSTGRES_DB=${PER_SERVICE_DATABASE_SCHEMA}
-      - POSTGRES_PASSWORD=${PER_SERVICE_DATABASE_PASSWORD}
-      - POSTGRES_USER=${PER_SERVICE_DATABASE_USERNAME}
-      - PGDATA=/var/lib/postgresql/data/mydata/
+      - MYSQL_DATABASE=${PER_SERVICE_DATABASE_SCHEMA}
+      - MYSQL_ROOT_PASSWORD=${PER_SERVICE_DATABASE_PASSWORD}
+      - MYSQL_USER=${PER_SERVICE_DATABASE_USERNAME}
+      - MYSQL_PASSWORD=${PER_SERVICE_DATABASE_PASSWORD}
     volumes:
-      - postgres_data:/var/lib/postgresql/data/mydata/
+      - mysql_data:/var/lib/mysql

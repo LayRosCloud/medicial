@@ -1,6 +1,6 @@
 package by.betrayal.personalservice.dto.policy;
 
-import by.betrayal.personalservice.entity.PersonEntity;
+import by.betrayal.personalservice.dto.person.PersonFullDto;
 import lombok.Data;
 
 import java.util.Date;
@@ -14,5 +14,5 @@ public class PolicyFullDto {
 
     private Date dateEnd;
 
-    private PersonEntity patient;
+    private PersonFullDto patient;
 }

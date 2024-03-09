@@ -39,7 +39,7 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
 
 	// database
-	runtimeOnly 'org.postgresql:postgresql'
+	runtimeOnly 'com.mysql:mysql-connector-j'
 	implementation 'org.liquibase:liquibase-core'
 
 	// mapper

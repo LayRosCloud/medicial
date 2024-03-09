@@ -1,5 +1,5 @@
 server:
-  port: 0
+  port: 8800
 spring:
   application:
     name: 'personal-service'
@@ -9,13 +9,13 @@ spring:
     url: jdbc:postgresql://${PER_SERVICE_DATABASE_HOST}:${PER_SERVICE_DATABASE_PORT}/${PER_SERVICE_DATABASE_SCHEMA}
     username: ${PER_SERVICE_DATABASE_USERNAME}
     password: ${PER_SERVICE_DATABASE_PASSWORD}
-    driver-class-name: org.postgresql.Driver
+    driver-class-name: com.mysql.jdbc.Driver
   liquibase:
     enabled: true
     change-log: classpath:db/changelog/master.yml
     user: ${PER_SERVICE_DATABASE_USERNAME}
     password: ${PER_SERVICE_DATABASE_PASSWORD}
-    driver-class-name: org.postgresql.Driver
+    driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:postgresql://${PER_SERVICE_DATABASE_HOST}:${PER_SERVICE_DATABASE_PORT}/${PER_SERVICE_DATABASE_SCHEMA}
 eureka:
   client:

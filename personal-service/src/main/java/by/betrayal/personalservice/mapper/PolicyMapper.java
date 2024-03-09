@@ -9,7 +9,7 @@ import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {PersonMapper.class})
 public interface PolicyMapper {
     PolicyFullDto toFullDto(PolicyEntity item);
     List<PolicyFullDto> toFullDto(List<PolicyEntity> items);
