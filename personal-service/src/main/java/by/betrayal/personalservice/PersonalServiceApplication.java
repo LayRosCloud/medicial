@@ -1,5 +1,6 @@
 package by.betrayal.personalservice;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.Banner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -13,6 +14,7 @@ public class PersonalServiceApplication {
 		new SpringApplicationBuilder(PersonalServiceApplication.class)
 				.bannerMode(Banner.Mode.OFF)
 				.run(args);
+
 	}
 
 }

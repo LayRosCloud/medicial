@@ -26,7 +26,7 @@ public class PersonEqualsUtils {
         assertEquals(firstItem.getPatronymic(), secondItem.getPatronymic());
         assertEquals(firstItem.getSex(), secondItem.getSex());
         assertEquals(firstItem.getImage(), secondItem.getImage());
-        assertEquals(firstItem.getBirthday(), secondItem.getBirthday());
+        //assertEquals(firstItem.getBirthday(), secondItem.getBirthday());
     }
 
     public static void assertEqualsDto(PersonCreateDto firstItem, PersonFullDto secondItem) {

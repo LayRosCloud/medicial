@@ -1,5 +1,6 @@
 package by.betrayal.personalservice.core.database;
 
+import by.betrayal.personalservice.core.utils.creator.PersonCreationUtils;
 import by.betrayal.personalservice.entity.PersonEntity;
 import by.betrayal.personalservice.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +12,11 @@ public class PersonDao {
     @Autowired
     private PersonRepository repository;
 
-    public void clearDatabase() {
+    public void clearDataTable() {
         repository.deleteAll();
     }
 
-    public  PersonEntity save(PersonEntity person) {
-        return repository.save(person);
+    public PersonEntity save() {
+        return repository.save(PersonCreationUtils.generatePerson());
     }
 }
