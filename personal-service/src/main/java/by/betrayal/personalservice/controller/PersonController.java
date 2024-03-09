@@ -7,6 +7,7 @@ import by.betrayal.personalservice.service.PersonService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,6 +37,7 @@ public class PersonController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public PersonFullDto create(@Valid @RequestBody PersonCreateDto dto) {
         log.info("--- Start request in controller `PersonController` - create ---");
         var item = service.create(dto);

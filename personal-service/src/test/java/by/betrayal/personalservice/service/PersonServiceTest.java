@@ -89,8 +89,8 @@ public class PersonServiceTest {
 
     @Test
     void updateTest_happyPath() {
-        var dto = PersonCreationUtils.generateUpdateDto();
         var findDto = PersonCreationUtils.generatePersonWithId();
+        var dto = PersonCreationUtils.generateUpdateDto(findDto.getId());
         findDto.setId(dto.getId());
         when(repository.findById(dto.getId())).thenReturn(Optional.of(
                 findDto
@@ -107,7 +107,7 @@ public class PersonServiceTest {
 
     @Test
     void updateTestInvalidId_happyPath() {
-        var dto = PersonCreationUtils.generateUpdateDto();
+        var dto = PersonCreationUtils.generateUpdateDto(20L);
         when(repository.findById(dto.getId())).thenReturn(Optional.empty());
 
         assertThrows(NotFoundException.class, () -> service.update(dto));

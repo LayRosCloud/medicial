@@ -3,6 +3,7 @@ package by.betrayal.personalservice.exception;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -24,5 +25,10 @@ public class Handler {
     @ExceptionHandler({NotFoundException.class})
     public ResponseEntity<?> handleException(NotFoundException exception) {
         return new ResponseEntity<String>(exception.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler({MethodArgumentNotValidException.class})
+    public ResponseEntity<?> handleException(MethodArgumentNotValidException exception) {
+        return new ResponseEntity<String>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }

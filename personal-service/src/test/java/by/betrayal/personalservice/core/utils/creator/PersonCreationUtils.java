@@ -41,9 +41,9 @@ public class PersonCreationUtils {
         var item = new PersonCreateDto();
         item.setFirstName(faker.name().firstName());
         item.setLastName(faker.name().lastName());
-        item.setPatronymic(faker.name().suffix());
-        var image = new MockMultipartFile(UUID.randomUUID().toString(), new byte[10]);
-        item.setImage(image);
+        item.setPatronymic(faker.name().name());
+        // var image = new MockMultipartFile(UUID.randomUUID().toString(), new byte[10]);
+        item.setImage(null);
 
         item.setSex(faker.bool().bool());
         item.setBirthday(faker.date().birthday().toInstant());
@@ -51,19 +51,40 @@ public class PersonCreationUtils {
         return item;
     }
 
-    public static PersonUpdateDto generateUpdateDto() {
+    public static PersonCreateDto generateCreateInvalidDto() {
+
+        var item = generateCreateDto();
+        item.setFirstName("");
+
+        return item;
+    }
+
+    public static PersonUpdateDto generateUpdateDto(Long id) {
         var faker = FakerUtils.FAKER;
 
         var item = new PersonUpdateDto();
-        item.setId(faker.number().randomNumber());
+        item.setId(id);
         item.setFirstName(faker.name().firstName());
         item.setLastName(faker.name().lastName());
         item.setPatronymic(faker.name().suffix());
-        var image = new MockMultipartFile(UUID.randomUUID().toString(), new byte[10]);
-        item.setImage(image);
+        // var image = new MockMultipartFile(UUID.randomUUID().toString(), new byte[10]);
+        item.setImage(null);
 
         item.setSex(faker.bool().bool());
         item.setBirthday(faker.date().birthday().toInstant());
+
+        return item;
+    }
+
+    public static PersonUpdateDto generateUpdateInvalidIdDto() {
+        var item = generateUpdateDto(20000L);
+
+        return item;
+    }
+
+    public static PersonUpdateDto generateUpdateInvalidDto(Long id) {
+        var item = generateUpdateDto(20000L);
+        item.setFirstName("");
 
         return item;
     }

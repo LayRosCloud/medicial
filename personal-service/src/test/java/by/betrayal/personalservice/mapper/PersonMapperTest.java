@@ -55,9 +55,8 @@ public class PersonMapperTest {
 
     @Test
     void convertToUpdateDto_happyPath() {
-        var dto = PersonCreationUtils.generateUpdateDto();
         var user = PersonCreationUtils.generatePersonWithId();
-        dto.setId(user.getId());
+        var dto = PersonCreationUtils.generateUpdateDto(user.getId());
 
         mapper.toEntity(user, dto);
 
