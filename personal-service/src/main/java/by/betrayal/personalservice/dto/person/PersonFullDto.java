@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import java.time.Instant;
+import java.util.Date;
 
 @Data
 public class PersonFullDto {
@@ -20,7 +21,7 @@ public class PersonFullDto {
 
     private Boolean sex;
 
-    private Instant birthday;
+    private Date birthday;
 
     private String image;
 }

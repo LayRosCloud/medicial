@@ -7,6 +7,7 @@ import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.Instant;
+import java.util.Date;
 
 
 @Data
@@ -28,7 +29,7 @@ public class PersonCreateDto {
     private Boolean sex;
 
     @NotNull(message = "birthday is not null")
-    private Instant birthday;
+    private Date birthday;
 
     private MultipartFile image;
 }

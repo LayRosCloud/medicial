@@ -15,7 +15,7 @@ public class PersonCreationUtils {
         var faker = FakerUtils.FAKER;
 
         var item = PersonEntity.builder()
-                .birthday(faker.date().birthday().toInstant())
+                .birthday(faker.date().birthday())
                 .sex(faker.bool().bool())
                 .image(UUID.randomUUID().toString() + ".jpg")
                 .firstName(faker.name().firstName())
@@ -46,7 +46,7 @@ public class PersonCreationUtils {
         item.setImage(null);
 
         item.setSex(faker.bool().bool());
-        item.setBirthday(faker.date().birthday().toInstant());
+        item.setBirthday(faker.date().birthday());
 
         return item;
     }
@@ -71,7 +71,7 @@ public class PersonCreationUtils {
         item.setImage(null);
 
         item.setSex(faker.bool().bool());
-        item.setBirthday(faker.date().birthday().toInstant());
+        item.setBirthday(faker.date().birthday());
 
         return item;
     }

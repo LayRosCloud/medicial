@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
+import java.util.Date;
 
 @Data
 @Entity
@@ -32,7 +33,7 @@ public class PersonEntity {
     public Boolean sex;
 
     @Column(name = "birthday", nullable = false)
-    public Instant birthday;
+    public Date birthday;
 
     @Column(name = "image")
     public String image;
