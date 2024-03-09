@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - include:
+      author: betrayal
+      file: classpath:db/changelog/change-01.yml
+  - include:
+      author: betrayal
+      file: classpath:db/changelog/change-02.yml
+  - include:
+      author: betrayal
+      file: classpath:db/changelog/change-03.yml
