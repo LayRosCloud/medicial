@@ -5,16 +5,26 @@ import by.betrayal.personalservice.core.utils.equals.PolicyEqualsUtils;
 import by.betrayal.personalservice.entity.PolicyEntity;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.mapstruct.factory.Mappers;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@ExtendWith(MockitoExtension.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = {PolicyMapperImpl.class, PersonMapperImpl.class})
 public class PolicyMapperTest {
-    private final PolicyMapper mapper = Mappers.getMapper(PolicyMapper.class);
+    private final PolicyMapper mapper;
+
+    @Autowired
+    public PolicyMapperTest(PolicyMapper mapper) {
+        this.mapper = mapper;
+    }
 
     @Test
     void convertToListFullDto_happyPath() {
