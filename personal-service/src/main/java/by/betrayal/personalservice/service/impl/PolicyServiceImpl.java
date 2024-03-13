@@ -3,6 +3,7 @@ package by.betrayal.personalservice.service.impl;
 import by.betrayal.personalservice.dto.policy.PolicyCreateDto;
 import by.betrayal.personalservice.dto.policy.PolicyFullDto;
 import by.betrayal.personalservice.dto.policy.PolicyUpdateDto;
+import by.betrayal.personalservice.entity.PersonEntity;
 import by.betrayal.personalservice.entity.PolicyEntity;
 import by.betrayal.personalservice.mapper.PolicyMapper;
 import by.betrayal.personalservice.repository.PersonRepository;
@@ -10,7 +11,7 @@ import by.betrayal.personalservice.repository.PolicyRepository;
 import by.betrayal.personalservice.service.PolicyService;
 import by.betrayal.personalservice.utils.PageUtils;
 import by.betrayal.personalservice.utils.ResponseLimitPage;
-import by.betrayal.personalservice.utils.ThrowableHelper;
+import by.betrayal.personalservice.utils.ThrowableUtils;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,12 @@ public class PolicyServiceImpl implements PolicyService {
     }
 
     @Override
+    public List<PolicyFullDto> findAll(Long patientId) {
+        var list = policyRepository.findAllByPatientId(patientId);
+        return mapper.toFullDto(list);
+    }
+
+    @Override
     public List<PolicyFullDto> findAll() {
         var list = policyRepository.findAll();
         return mapper.toFullDto(list);
@@ -53,9 +60,7 @@ public class PolicyServiceImpl implements PolicyService {
     @Override
     @Transactional
     public PolicyFullDto create(PolicyCreateDto dto) {
-        var patient = personRepository.findById(dto.getPatientId()).orElseThrow(() ->
-                ThrowableHelper.throwNotFoundException(dto.getPatientId())
-        );
+        var patient = findByIdPersonOrThrowNotFoundException(dto.getPatientId());
 
         var item = mapper.toEntity(dto);
         item.setPatient(patient);
@@ -69,9 +74,7 @@ public class PolicyServiceImpl implements PolicyService {
     @Transactional
     public PolicyFullDto update(PolicyUpdateDto dto) {
         var policy = findByIdOrThrowNotFoundException(dto.getId());
-        var patient = personRepository.findById(dto.getPatientId()).orElseThrow(() ->
-                ThrowableHelper.throwNotFoundException(dto.getPatientId())
-        );
+        var patient = findByIdPersonOrThrowNotFoundException(dto.getPatientId());
 
         mapper.toEntity(policy, dto);
         policy.setPatient(patient);
@@ -91,7 +94,13 @@ public class PolicyServiceImpl implements PolicyService {
 
     private PolicyEntity findByIdOrThrowNotFoundException(Long id) {
         return policyRepository.findById(id).orElseThrow(() ->
-                        ThrowableHelper.throwNotFoundException(id)
-                );
+                ThrowableUtils.throwNotFoundException(id)
+        );
+    }
+
+    private PersonEntity findByIdPersonOrThrowNotFoundException(Long id) {
+        return personRepository.findById(id).orElseThrow(() ->
+                ThrowableUtils.throwNotFoundException(id)
+        );
     }
 }

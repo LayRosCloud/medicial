@@ -7,7 +7,7 @@ import by.betrayal.personalservice.entity.PersonEntity;
 import by.betrayal.personalservice.mapper.PersonMapper;
 import by.betrayal.personalservice.repository.PersonRepository;
 import by.betrayal.personalservice.service.PersonService;
-import by.betrayal.personalservice.utils.ThrowableHelper;
+import by.betrayal.personalservice.utils.ThrowableUtils;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -91,7 +91,7 @@ public class PersonServiceImpl implements PersonService {
 
     private PersonEntity findPersonByIdOrThrowNotFound(Long id) {
         return repository.findById(id).orElseThrow(() ->
-                ThrowableHelper.throwNotFoundException(id)
+                ThrowableUtils.throwNotFoundException(id)
         );
     }
 }

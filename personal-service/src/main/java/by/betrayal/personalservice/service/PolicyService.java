@@ -11,6 +11,7 @@ import java.util.List;
 public interface PolicyService {
 
     ResponseLimitPage<PolicyFullDto> findAll(Integer limit, Integer page);
+    List<PolicyFullDto> findAll(Long patientId);
     List<PolicyFullDto> findAll();
     PolicyFullDto findById(Long id);
     PolicyFullDto create(PolicyCreateDto dto);

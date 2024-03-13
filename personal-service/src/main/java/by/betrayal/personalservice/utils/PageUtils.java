@@ -1,12 +1,13 @@
 package by.betrayal.personalservice.utils;
 
 import by.betrayal.personalservice.exception.BadRequestException;
+import lombok.EqualsAndHashCode;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import java.util.ArrayList;
 
-
+@EqualsAndHashCode
 public class PageUtils implements Pageable {
 
     private final int limit;

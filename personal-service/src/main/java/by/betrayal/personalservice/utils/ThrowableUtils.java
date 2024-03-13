@@ -3,7 +3,7 @@ package by.betrayal.personalservice.utils;
 import by.betrayal.personalservice.exception.BadRequestException;
 import by.betrayal.personalservice.exception.NotFoundException;
 
-public class ThrowableHelper {
+public class ThrowableUtils {
 
     public static NotFoundException throwNotFoundException() {
         return new NotFoundException();

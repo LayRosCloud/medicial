@@ -1,27 +1,29 @@
 package by.betrayal.personalservice.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
-@Entity
-@Table(name = "policies")
 @Data
-@Builder
-@AllArgsConstructor
+@Entity
 @NoArgsConstructor
-public class PolicyEntity {
+@AllArgsConstructor
+@Builder
+@Table(name = "contacts")
+public class ContactEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "number", nullable = false)
-    private String number;
+    @Column(name = "value", nullable = false)
+    private String value;
 
-    @Column(name = "date_end", nullable = false)
-    private Date dateEnd;
+    @ManyToOne
+    @JoinColumn(name = "type_id", nullable = false)
+    private ContactTypeEntity type;
 
     @ManyToOne
     @JoinColumn(name = "patient_id", nullable = false)
@@ -29,5 +31,4 @@ public class PolicyEntity {
 
     @Column(name = "patient_id", nullable = false, insertable = false, updatable = false)
     private Long patientId;
-
 }
