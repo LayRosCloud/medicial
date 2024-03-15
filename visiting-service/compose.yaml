@@ -1,0 +1,16 @@
+version: "3.5"
+volumes:
+  visits_data:
+services:
+  visiting-service:
+    image: mysql:8.0
+    container_name: visits_mysql
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_DATABASE=visits
+      - MYSQL_ROOT_PASSWORD=verysecret
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=secret
+    volumes:
+      - visits_data:/var/lib/mysql

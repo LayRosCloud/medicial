@@ -17,6 +17,9 @@ spring:
     password: ${PER_SERVICE_DATABASE_PASSWORD}
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:postgresql://${PER_SERVICE_DATABASE_HOST}:${PER_SERVICE_DATABASE_PORT}/${PER_SERVICE_DATABASE_SCHEMA}
+  docker:
+    compose:
+      file: personal-service/compose.yaml
 eureka:
   client:
     service-url:
