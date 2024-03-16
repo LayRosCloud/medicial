@@ -26,8 +26,15 @@ spring:
   docker:
     compose:
       file: personal-service/compose.yaml
-
-
+  rabbitmq:
+    host: 127.0.0.1
+    username: guest
+    password: guest
+    queue-notifications:
+      name: 'notifications'
+    exchange-notifications:
+      name: 'notifications_exchange'
+    key: 'notifications_routing_key'
 eureka:
   client:
     service-url:

@@ -12,6 +12,8 @@ import by.betrayal.personalservice.service.PersonService;
 import by.betrayal.personalservice.utils.ThrowableUtils;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,6 +27,13 @@ public class PersonServiceImpl implements PersonService {
     private final PersonRepository repository;
     private final PersonMapper mapper;
     private final VisitingClient visitClient;
+    private final RabbitTemplate template;
+
+    @Value("${spring.rabbitmq.exchange-notifications.name}")
+    private String exchange;
+
+    @Value("${spring.rabbitmq.key}")
+    private String routingKey;
 
     @Override
     @Transactional
@@ -52,8 +61,8 @@ public class PersonServiceImpl implements PersonService {
             var urlImage = saveImage(image);
             item.setImage(urlImage);
         }
-
         var response = repository.saveAndFlush(item);
+        template.convertAndSend(exchange, routingKey, response);
 
         return mapper.toFullDto(response);
     }

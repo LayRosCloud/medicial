@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: 'notification-service'
+  rabbitmq:
+    username: guest
+    password: guest
+    host: 127.0.0.1
+    port: 5672
+    queue:
+      name: 'notifications'
+    exchange:
+      name: 'notifications_exchange'
+    key: 'notifications_routing_key'
+server:
+  port: 8000
