@@ -2,4 +2,5 @@ rootProject.name = 'medicial'
 
 includeBuild 'registry-service'
 includeBuild 'personal-service'
+includeBuild 'visiting-service'
 

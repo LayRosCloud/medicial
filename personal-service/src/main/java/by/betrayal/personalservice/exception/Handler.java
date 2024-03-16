@@ -1,8 +1,6 @@
 package by.betrayal.personalservice.exception;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -32,5 +30,10 @@ public class Handler {
     @ExceptionHandler({MethodArgumentNotValidException.class})
     public ResponseEntity<?> handleException(MethodArgumentNotValidException exception) {
         return new ResponseEntity<String>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler({ServiceNotAvailableException.class})
+    public ResponseEntity<?> handleException(ServiceNotAvailableException exception) {
+        return new ResponseEntity<String>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

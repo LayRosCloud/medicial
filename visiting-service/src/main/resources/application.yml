@@ -1,11 +1,11 @@
 spring:
   application:
-    name: visiting-service
+    name: 'visiting-service'
   cloud:
     openfeign:
       client:
         config:
-          personal-service:
+          personal-client:
             url: http://localhost:8901/personal-service/
   liquibase:
     enabled: true

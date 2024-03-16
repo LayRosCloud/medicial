@@ -3,6 +3,12 @@ server:
 spring:
   application:
     name: 'personal-service'
+  cloud:
+    openfeign:
+      client:
+        config:
+          visiting-client:
+            url: http://localhost:8901/visiting-service/
   jpa:
     show-sql: true
   datasource:
@@ -20,6 +26,8 @@ spring:
   docker:
     compose:
       file: personal-service/compose.yaml
+
+
 eureka:
   client:
     service-url:

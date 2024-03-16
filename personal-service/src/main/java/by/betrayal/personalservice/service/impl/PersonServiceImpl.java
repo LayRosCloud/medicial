@@ -1,9 +1,11 @@
 package by.betrayal.personalservice.service.impl;
 
+import by.betrayal.personalservice.client.controller.VisitingClient;
 import by.betrayal.personalservice.dto.person.PersonCreateDto;
 import by.betrayal.personalservice.dto.person.PersonFullDto;
 import by.betrayal.personalservice.dto.person.PersonUpdateDto;
 import by.betrayal.personalservice.entity.PersonEntity;
+import by.betrayal.personalservice.exception.ServiceNotAvailableException;
 import by.betrayal.personalservice.mapper.PersonMapper;
 import by.betrayal.personalservice.repository.PersonRepository;
 import by.betrayal.personalservice.service.PersonService;
@@ -22,6 +24,7 @@ public class PersonServiceImpl implements PersonService {
 
     private final PersonRepository repository;
     private final PersonMapper mapper;
+    private final VisitingClient visitClient;
 
     @Override
     @Transactional
@@ -78,10 +81,27 @@ public class PersonServiceImpl implements PersonService {
     @Transactional
     public PersonFullDto delete(Long id) {
         var item  = findPersonByIdOrThrowNotFound(id);
-
         repository.delete(item);
+        tryDeleteVisitsAndDiagnostics(id);
 
         return mapper.toFullDto(item);
+    }
+
+    private void tryDeleteVisitsAndDiagnostics(Long patientId) {
+        try {
+            deleteAllVisitsByPatientId(patientId);
+            deleteAllDiagnosticsByPatientId(patientId);
+        } catch (Exception ex) {
+            throw new ServiceNotAvailableException();
+        }
+    }
+
+    private void deleteAllVisitsByPatientId(Long patientId) {
+        visitClient.deleteAllVisitsByPatientId(patientId);
+    }
+
+    private void deleteAllDiagnosticsByPatientId(Long patientId) {
+        visitClient.deleteAllDiagnosticsByPatientId(patientId);
     }
 
     private String saveImage(MultipartFile fileImage) {
