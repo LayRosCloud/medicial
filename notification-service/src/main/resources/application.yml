@@ -11,5 +11,16 @@ spring:
     exchange:
       name: 'notifications_exchange'
     key: 'notifications_routing_key'
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: vogistv@gmail.com
+    password: 'drnztlenraszqale'
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 server:
   port: 8000
