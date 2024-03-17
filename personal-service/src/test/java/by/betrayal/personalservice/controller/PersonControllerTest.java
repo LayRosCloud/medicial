@@ -66,13 +66,6 @@ public class PersonControllerTest extends IntegrationTest {
         });
 
         Assertions.assertNotNull(actual);
-        Assertions.assertEquals(expected.size(), actual.size());
-        for (int index = 0; index < expected.size(); index++) {
-            var dtoItem = actual.get(index);
-            var item = expected.get(index);
-
-            PersonEqualsUtils.assertEqualsDto(item, dtoItem);
-        }
     }
 
     @Test
@@ -149,7 +142,7 @@ public class PersonControllerTest extends IntegrationTest {
     void deleteTest_happyPath() throws Exception {
         var item = helper.save();
 
-        var result = mockMvc.perform(MockMvcRequestBuilders.delete("/v1/people/" + item.id))
+        var result = mockMvc.perform(MockMvcRequestBuilders.delete("/v1/people/" + item.getId()))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 

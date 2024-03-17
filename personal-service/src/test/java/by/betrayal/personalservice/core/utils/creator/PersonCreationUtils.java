@@ -7,9 +7,21 @@ import by.betrayal.personalservice.entity.PersonEntity;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class PersonCreationUtils {
+
+    public static List<PersonEntity> generatePersons(int count) {
+        var persons = new ArrayList<PersonEntity>();
+
+        for (int i = 0; i < count; i++) {
+            persons.add(generatePerson());
+        }
+
+        return persons;
+    }
 
     public static PersonEntity generatePerson() {
         var faker = FakerUtils.FAKER;

@@ -5,10 +5,22 @@ import by.betrayal.personalservice.dto.policy.PolicyCreateDto;
 import by.betrayal.personalservice.dto.policy.PolicyUpdateDto;
 import by.betrayal.personalservice.entity.PolicyEntity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 public class PolicyCreationUtils {
+
+    public static List<PolicyEntity> generatePolicies(int count) {
+        final var list = new ArrayList<PolicyEntity>(count);
+
+        for (int i = 0; i < count; i++) {
+            list.add(generatePolicy());
+        }
+
+        return list;
+    }
 
     public static PolicyEntity generatePolicy() {
         var faker = FakerUtils.FAKER;

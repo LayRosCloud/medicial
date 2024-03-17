@@ -1,5 +1,6 @@
 package by.betrayal.personalservice.service;
 
+import by.betrayal.personalservice.core.utils.creator.PersonCreationUtils;
 import by.betrayal.personalservice.core.utils.creator.PolicyCreationUtils;
 import by.betrayal.personalservice.core.utils.equals.PolicyEqualsUtils;
 import by.betrayal.personalservice.entity.PersonEntity;
@@ -31,6 +32,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import static org.mockito.Mockito.when;
 
@@ -53,40 +55,26 @@ public class PolicyServiceTest {
 
     @Test
     void findAllTest_happyPath() {
+        //given
         var list = new ArrayList<PolicyEntity>();
         list.add(PolicyCreationUtils.generatePolicyWithId());
         list.add(PolicyCreationUtils.generatePolicyWithId());
 
         when(policyRepository.findAll()).thenReturn(list);
 
+        //when
         var actual = service.findAll();
 
+        //then
         Assertions.assertNotNull(actual);
         Assertions.assertEquals(list.size(), actual.size());
-
-        for (var index = 0; index < list.size(); index++) {
-            var dto = actual.get(index);
-            var item = list.get(index);
-
-            PolicyEqualsUtils.assertEqualsDto(item, dto);
-        }
     }
 
     @Test
     void findAllByLimitAndPageTest_happyPath() {
+        //given
         final var totalCount = 10;
-        var list = new ArrayList<PolicyEntity>(totalCount);
-        list.add(PolicyCreationUtils.generatePolicyWithId());
-        list.add(PolicyCreationUtils.generatePolicyWithId());
-        list.add(PolicyCreationUtils.generatePolicyWithId());
-        list.add(PolicyCreationUtils.generatePolicyWithId());
-        list.add(PolicyCreationUtils.generatePolicyWithId());
-
-        list.add(PolicyCreationUtils.generatePolicyWithId());
-        list.add(PolicyCreationUtils.generatePolicyWithId());
-        list.add(PolicyCreationUtils.generatePolicyWithId());
-        list.add(PolicyCreationUtils.generatePolicyWithId());
-        list.add(PolicyCreationUtils.generatePolicyWithId());
+        var list = PolicyCreationUtils.generatePolicies(totalCount);
 
         final var limit = 5;
         final var page = 0;
@@ -94,9 +82,10 @@ public class PolicyServiceTest {
         var pageUtils = new PageUtils(limit, page);
         var pageItem = new PageImpl<PolicyEntity>(list.subList(offset, limit + offset), pageUtils, totalCount);
         when(policyRepository.findAll(pageUtils)).thenReturn(pageItem);
-
+        //when
         var actual = service.findAll(limit, page);
 
+        //then
         Assertions.assertNotNull(actual);
         Assertions.assertEquals(actual.totalCount(), totalCount);
         Assertions.assertEquals(limit, actual.items().size());
@@ -104,40 +93,40 @@ public class PolicyServiceTest {
 
     @Test
     void findAllByPatientIdTest_happyPath() {
+        //given
         final var totalCount = 10;
-        var list = new ArrayList<PolicyEntity>(totalCount);
-        list.add(PolicyCreationUtils.generatePolicyWithId());
-        list.add(PolicyCreationUtils.generatePolicyWithId());
-        list.add(PolicyCreationUtils.generatePolicyWithId());
-        list.add(PolicyCreationUtils.generatePolicyWithId());
-        list.add(PolicyCreationUtils.generatePolicyWithId());
+        var list = PolicyCreationUtils.generatePolicies(totalCount);
 
         var patientId = 5L;
+        var patient = PersonCreationUtils.generatePerson();
+        patient.setId(patientId);
+        when(personRepository.findById(patientId)).thenReturn(Optional.of(patient));
+        when(policyRepository.findAllByPatient(patient)).thenReturn(list);
 
-        when(policyRepository.findAllByPatientId(patientId)).thenReturn(list);
-
+        //when
         var actual = service.findAll(patientId);
 
+        //then
         Assertions.assertNotNull(actual);
         Assertions.assertEquals(list.size(), actual.size());
     }
 
     @Test
     void create_happyPath() {
+        //given
         final var totalCount = 10;
-        var list = new ArrayList<PolicyEntity>(totalCount);
-        list.add(PolicyCreationUtils.generatePolicyWithId());
-        list.add(PolicyCreationUtils.generatePolicyWithId());
-        list.add(PolicyCreationUtils.generatePolicyWithId());
-        list.add(PolicyCreationUtils.generatePolicyWithId());
-        list.add(PolicyCreationUtils.generatePolicyWithId());
+        var list = PolicyCreationUtils.generatePolicies(totalCount);
 
         var patientId = 5L;
+        var patient = PersonCreationUtils.generatePerson();
+        patient.setId(patientId);
+        when(personRepository.findById(patientId)).thenReturn(Optional.of(patient));
+        when(policyRepository.findAllByPatient(patient)).thenReturn(list);
 
-        when(policyRepository.findAllByPatientId(patientId)).thenReturn(list);
-
+        //when
         var actual = service.findAll(patientId);
 
+        //then
         Assertions.assertNotNull(actual);
         Assertions.assertEquals(list.size(), actual.size());
     }

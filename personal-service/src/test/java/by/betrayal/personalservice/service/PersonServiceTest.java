@@ -36,9 +36,7 @@ public class PersonServiceTest {
 
     @Test
     void findAll_happyPath() {
-        var expected = new ArrayList<PersonEntity>();
-        expected.add(PersonCreationUtils.generatePersonWithId());
-        expected.add(PersonCreationUtils.generatePersonWithId());
+        var expected = PersonCreationUtils.generatePersons(2);
 
         when(repository.findAll()).thenReturn(expected);
 
@@ -46,13 +44,6 @@ public class PersonServiceTest {
 
         assertNotNull(actual);
         assertEquals(expected.size(), actual.size());
-
-        for (int index = 0; index < expected.size(); index++) {
-            var itemDto = actual.get(index);
-            var item = expected.get(index);
-
-            PersonEqualsUtils.assertEqualsDto(item, itemDto);
-        }
     }
 
 

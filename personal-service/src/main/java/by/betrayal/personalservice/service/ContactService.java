@@ -12,9 +12,10 @@ public interface ContactService {
 
     List<ContactFullDto> findAll(Long patientId);
     ContactFullDto findById(Long id);
-
     ContactFullDto create(ContactCreateDto dto);
+
     ContactFullDto update(ContactUpdateDto dto);
+
     ContactFullDto delete(Long id);
 
 }

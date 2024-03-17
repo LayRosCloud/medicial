@@ -9,8 +9,8 @@ import java.util.Date;
 @Table(name = "policies")
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class PolicyEntity {
 
     @Id

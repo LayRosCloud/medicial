@@ -1,5 +1,6 @@
 package by.betrayal.personalservice.service.impl;
 
+import by.betrayal.personalservice.dto.person.PersonCreateDto;
 import by.betrayal.personalservice.dto.policy.PolicyCreateDto;
 import by.betrayal.personalservice.dto.policy.PolicyFullDto;
 import by.betrayal.personalservice.dto.policy.PolicyUpdateDto;
@@ -40,7 +41,8 @@ public class PolicyServiceImpl implements PolicyService {
 
     @Override
     public List<PolicyFullDto> findAll(Long patientId) {
-        var list = policyRepository.findAllByPatientId(patientId);
+        var patient = findByIdPersonOrThrowNotFoundException(patientId);
+        var list = policyRepository.findAllByPatient(patient);
         return mapper.toFullDto(list);
     }
 
