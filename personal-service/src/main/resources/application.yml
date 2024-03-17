@@ -3,6 +3,12 @@ server:
 spring:
   application:
     name: 'personal-service'
+  cloud:
+    openfeign:
+      client:
+        config:
+          visiting-client:
+            url: http://localhost:8901/visiting-service/
   jpa:
     show-sql: true
   datasource:
@@ -17,6 +23,18 @@ spring:
     password: ${PER_SERVICE_DATABASE_PASSWORD}
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:postgresql://${PER_SERVICE_DATABASE_HOST}:${PER_SERVICE_DATABASE_PORT}/${PER_SERVICE_DATABASE_SCHEMA}
+  docker:
+    compose:
+      file: personal-service/compose.yaml
+  rabbitmq:
+    host: 127.0.0.1
+    username: guest
+    password: guest
+    queue-notifications:
+      name: 'notifications'
+    exchange-notifications:
+      name: 'notifications_exchange'
+    key: 'notifications_routing_key'
 eureka:
   client:
     service-url:

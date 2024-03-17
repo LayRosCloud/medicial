@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: 'visiting-service'
+  cloud:
+    openfeign:
+      client:
+        config:
+          personal-client:
+            url: http://localhost:8901/personal-service/
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/master.yml
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/visits
+    username: admin
+    password: secret
+  docker:
+    compose:
+      file: visiting-service/compose.yaml
+
+server:
+  port: 10000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka

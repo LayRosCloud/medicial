@@ -20,47 +20,50 @@ import java.util.List;
 @RequestMapping(value = PersonController.ENDPOINT)
 public class PersonController {
 
+
     private final PersonService service;
     public static final String ENDPOINT = "v1/people";
     public static final String ENDPOINT_ID = "{id}";
 
+    private static final String CONTROLLER_NAME = "Person";
+
     @GetMapping
     public ResponseEntity<List<PersonFullDto>> findAll() {
-        log.info(LoggerUtils.createLogStart("PersonController", "findAll", ""));
+        LoggerUtils.createLogFindAllStart(CONTROLLER_NAME, "", "");
         var items = service.findAll();
-        log.info(LoggerUtils.createLogEnd("PersonController", "findAll", "with result size {}"), items.size());
+        LoggerUtils.createLogFindAllEnd(CONTROLLER_NAME, "", items.size());
         return ResponseEntity.ok(items);
     }
 
     @GetMapping( ENDPOINT_ID)
     public ResponseEntity<PersonFullDto> findById(@PathVariable Long id) {
-        log.info(LoggerUtils.createLogIdStart("PersonController", "findById", id));
+        LoggerUtils.createLogFindByIdStart(CONTROLLER_NAME, id);
         var item = service.findById(id);
-        log.info(LoggerUtils.createLogEnd("PersonController", "findById", "result success"));
+        LoggerUtils.createLogFindByIdEnd(CONTROLLER_NAME, item.toString());
         return ResponseEntity.ok(item);
     }
 
     @PostMapping
     public ResponseEntity<PersonFullDto> create(@Valid @RequestBody PersonCreateDto dto) {
-        log.info(LoggerUtils.createLogStart("PersonController", "create", dto.toString()));
+        LoggerUtils.createLogCreateStart(CONTROLLER_NAME, dto.toString());
         var item = service.create(dto);
-        log.info(LoggerUtils.createLogEnd("PersonController", "create", "object created with id {}"), item.getId());
+        LoggerUtils.createLogCreateEnd(CONTROLLER_NAME, item.toString());
         return new ResponseEntity<>(item, HttpStatus.CREATED);
     }
 
     @PutMapping
     public ResponseEntity<PersonFullDto> update(@Valid @RequestBody PersonUpdateDto dto) {
-        log.info(LoggerUtils.createLogStart("PersonController", "update", dto.toString()));
+        LoggerUtils.createLogUpdateStart(CONTROLLER_NAME, dto.toString());
         var item = service.update(dto);
-        log.info(LoggerUtils.createLogEnd("PersonController", "update", item.toString()));
+        LoggerUtils.createLogUpdateStart(CONTROLLER_NAME, item.toString());
         return ResponseEntity.ok(item);
     }
 
     @DeleteMapping(ENDPOINT_ID)
     public ResponseEntity<PersonFullDto> delete(@PathVariable Long id) {
-        log.info(LoggerUtils.createLogIdStart("PersonController", "delete", id));
+        LoggerUtils.createLogDeleteStart(CONTROLLER_NAME, id);
         var item = service.delete(id);
-        log.info(LoggerUtils.createLogEnd("PersonController", "delete", item.toString()));
+        LoggerUtils.createLogDeleteEnd(CONTROLLER_NAME, item.toString());
         return ResponseEntity.ok(item);
     }
 }
