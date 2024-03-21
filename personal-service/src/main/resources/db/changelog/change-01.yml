@@ -1,0 +1,197 @@
+databaseChangeLog:
+  - changeSet:
+      author: betrayal
+      id: first-commit
+      changes:
+        - createTable:
+            tableName: people
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: patronymic
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: sex
+                  type: bool
+                  constraints:
+                    nullable: false
+              - column:
+                  name: birthday
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: image
+                  type: varchar(150)
+                  constraints:
+                    nullable: true
+
+        - createTable:
+            tableName: policies
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: patient_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_policy_patient
+                    references: people(id)
+              - column:
+                  name: number
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date_end
+                  type: date
+                  constraints:
+                    nullable: true
+
+        - createTable:
+            tableName: passports
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: patient_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_passports_patients
+                    references: people(id)
+              - column:
+                  name: series
+                  type: varchar(5)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: number
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: addresses
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: patient_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_addresses_patients
+                    references: people(id)
+              - column:
+                  name: zip_code
+                  type: varchar(6)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: country
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: region
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: city
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: street
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: apartment
+                  type: varchar(5)
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: contact_types
+            columns:
+              - column:
+                  name: id
+                  type: smallint
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: contacts
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: patient_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_contacts_people
+                    references: people(id)
+              - column:
+                  name: value
+                  type: varchar(40)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: type_id
+                  type: smallint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_types_contacts
+                    references: contact_types(id)
+
+
+

@@ -1,0 +1,82 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: betrayal
+      changes:
+        - createTable:
+            tableName: institutions
+            columns:
+              - column:
+                  name: id
+                  type: SMALLINT
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: visits
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: patient_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: institution_id
+                  type: SMALLINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_visits_institutions
+                    references: institutions(id)
+              - column:
+                  name: date
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_appoint
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: diagnostics
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                   name: patient_id
+                   type: BIGINT
+                   constraints:
+                     nullable: false
+              - column:
+                  name: value
+                  type: VARCHAR(80)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_healed
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
